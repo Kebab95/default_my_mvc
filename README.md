@@ -7,4 +7,7 @@ Ez egy alap MVC amit szabadon lehet használni. Igyekszem folyamatos tesztelés 
 
 Egyéb javaslatokat is szívesen várok, hogy hova lehetne fejleszteni.
 
+Kérlek ha használni szeretnéd egy Fork-ot nyomj rá.
+
 Ha letesztelted és megvagy elégedve vele, kérlek jelezd vissza egy csillaggal vagy akárhogy, így látnám, hogy nem csak magamnak feljesztgetem ezt a szépséget :D
+
