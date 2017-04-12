@@ -19,6 +19,9 @@ class Index extends Controller
 
 	}
 
+    /**
+     * Render View page
+     */
     public function index()
     {
         $this->view->render("index/index");

@@ -5,6 +5,8 @@ class Database extends PDO
 
     /**
      * Database constructor.
+     * Connect to the Database
+     * The Database connect data change to in config.php
      */
     public function __construct()
     {
@@ -14,6 +16,14 @@ class Database extends PDO
         parent::setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
     }
 
+    /**
+     *
+     * Database Select SQL generator and execute
+     * @param $table string
+     * @param $columns array
+     * @param $where null|string
+     * @return array|null
+     */
     public function SQLSelect($table, array $columns= array(), $where = null)
     {
 
@@ -45,6 +55,11 @@ class Database extends PDO
 
     }
 
+    /**
+     * Database Insert SQL generator and execute
+     * @param string $table
+     * @param array $values
+     */
     public function SQLInsertOneRow($table, array $values)
     {
         $col = "";
@@ -64,7 +79,13 @@ class Database extends PDO
         $sth->execute();
     }
 
-    public function SQLUpdate($table, array $values,$where)
+    /**
+     * Database Update SQL generator and execute
+     * @param string $table
+     * @param array $values
+     * @param string $where
+     */
+    public function SQLUpdate($table, array $values, $where)
     {
         $vals = "";
         foreach ($values as $key => $value) {
@@ -78,7 +99,12 @@ class Database extends PDO
         $sth->execute();
     }
 
-    public function SQLDelete($table,$where)
+    /**
+     * Database Delete SQL generator and execute
+     * @param string $table
+     * @param string $where
+     */
+    public function SQLDelete($table, $where)
     {
         $sql = "DELETE FROM ".$table." WHERE ".$where;
         $sth = parent::prepare($sql);

@@ -8,6 +8,9 @@
  */
 class Auth
 {
+    /**
+     * @return bool
+     */
     public static function checkedLogged()
     {
         if (Session::get("loggedIn") == true){

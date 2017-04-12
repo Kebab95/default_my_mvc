@@ -9,6 +9,7 @@
 class Model
 {
     /**
+     * Variable for Page Database connects
      * @var Database
      */
     protected $db;

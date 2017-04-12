@@ -12,7 +12,6 @@ class Hash
      * @param string $algo
      * @param string $data
      * @return string
-     * @internal param string $salt
      */
     public static function create($algo, $data)
     {
@@ -22,6 +21,10 @@ class Hash
         return hash_final($context);
     }
 
+    /**
+     * @param string $data
+     * @return string
+     */
     public static function createMD5($data)
     {
         return self::create("md5",$data);

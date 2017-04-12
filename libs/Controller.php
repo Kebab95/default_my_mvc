@@ -8,36 +8,50 @@
  */
 abstract class Controller
 {
-    abstract public function index();
     /**
+     * Required function
+     * The Bootstrap call this when render View page
+     * @return mixed
+     */
+    abstract public function index();
+
+    /**
+     * Variable for page View
      * @var View
      */
     protected $view;
+
     /**
+     * Variable for page Model
      * @var Model
      */
     protected $model;
-	/**
-	 * Controller constructor.
-	 */
-	public function __construct()
-	{
-		//echo "Main Controller";
-		$this->view = new View();
 
-	}
+    /**
+     * The Constructor create a new View class
+     * Controller constructor.
+     */
+    public function __construct()
+    {
+        //echo "Main Controller";
+        $this->view = new View();
 
+    }
+
+    /**
+     * This function load the model for View
+     * @param $name string
+     */
     public function loadModel($name)
     {
-        $path = ROOT."models/".$name."_model.php";
-        if (file_exists($path)){
+        $path = ROOT . MODELS . $name . "_model.php";
+        if (file_exists($path)) {
             require $path;
 
-            $modelName = $name.'_Model';
+            $modelName = $name . '_Model';
             $this->model = new $modelName;
         }
-	}
-
+    }
 
 
 }
