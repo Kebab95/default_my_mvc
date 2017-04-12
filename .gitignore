@@ -13,7 +13,6 @@ views/dashboard/
 views/help/
 views/login/
 views/user/
-!/models/index_model.php
 controllers/errorpage.php
 views/error/
 !/controllers/errorpage.php

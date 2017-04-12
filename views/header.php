@@ -14,7 +14,7 @@
     <?php
     if (isset($this->meta) && count($this->meta)>0){
         foreach ($this->meta as $m) {
-            echo '<script src="'.URL.'views/'.$m.'"></script>';
+            echo '<meta name="'.$m[0].'" content="'.$m[1].'">';
         }
     }
 
@@ -37,32 +37,11 @@
         <div class="navbar-header">
             <a class="navbar-brand" href="<?php echo URL?>index/">Document</a>
         </div>
-        <div class="collapse navbar-collapse navbar-right">
-            <ul class="nav navbar-nav">
-                <?php
-                    if (Session::issetVal("loggedIn") &&Session::get("loggedIn") ==true){
-                        if (Session::get("userRole") =="owner"){
-                            echo '<li><a href="'.URL.'user/">Users</a> </li>';
-                        }
-                        echo '<li><a href="'.URL.'dashboard/logout/">Logout</a> </li>';
-                    }
-                ?>
-            </ul>
-        </div>
 
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li><a href="<?php echo URL?>index/">Index</a></li>
-                <li><a href="<?php echo URL?>help/">Help</a></li>
-                <?php
-                    if (Session::issetVal("loggedIn") &&Session::get("loggedIn") ==true){
-                        echo '<li><a href="'.URL.'dashboard/">Dashboard</a></li>';
-                    }
-                    else {
-                        echo '<li><a href="'.URL.'login/">Login</a></li>';
-                    }
-                ?>
-
+                <li><a href="<?php echo URL?>about/">About</a></li>
             </ul>
         </div>
     </div>

@@ -57,9 +57,9 @@ class View
     {
         array_push($this->css,$filePath);
     }
-    public function addMetaTag($meta)
+    public function addMetaTag($metaname,$content)
     {
-        array_push($this->meta,$meta);
+        array_push($this->meta,array($metaname,$content));
     }
 
     /**
