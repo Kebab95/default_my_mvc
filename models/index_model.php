@@ -6,7 +6,7 @@
  * Date: 2017.04.12.
  * Time: 21:40
  */
-class index_model extends Model
+class index_Model extends Model
 {
 
     /**
