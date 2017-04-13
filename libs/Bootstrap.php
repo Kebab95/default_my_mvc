@@ -84,44 +84,47 @@ class Bootstrap
 
     /**
      * Calling other method when one more url param
-     * www.example.com/controller/method/(param1)
+     * www.example.com/controller/method/(param1)/(param2)/(param3)/
      * @return bool
      */
     private function _callControllerMethod()
     {
         $length = count($this->_url);
-
-        switch ($length) {
-            case 5:
-                break;
-            case 4:
-                break;
-            case 3:
-                break;
-            case 2:
-                break;
-        }
-
-        if (isset($this->_url[2])) {
-            if (method_exists($this->_controller, $this->_url[1])) {
-                $this->_controller->{$this->_url[1]}($this->_url[2]);
-            } else {
+       // var_dump($this->_url);
+        if ($length>1 &&$length<6){
+            if (method_exists($this->_controller, $this->_url[1])){
+                switch ($length) {
+                    case 5:
+                        $this->_controller->{$this->_url[1]}($this->_url[2],$this->_url[3],$this->_url[4]);
+                        break;
+                    case 4:
+                        $this->_controller->{$this->_url[1]}($this->_url[2],$this->_url[3]);
+                        break;
+                    case 3:
+                        $this->_controller->{$this->_url[1]}($this->_url[2]);
+                        break;
+                    case 2:
+                        $this->_controller->{$this->_url[1]}();
+                        break;
+                    default:
+                        $this->_controller->index();
+                }
+            }
+            else {
                 $this->_error();
                 return false;
             }
-        } else {
-            if (isset($this->_url[1])) {
-                if (method_exists($this->_controller, $this->_url[1])) {
-                    $this->_controller->{$this->_url[1]}();
-                } else {
-                    $this->_error();
-                    return false;
-                }
-            } else {
+
+        }else {
+            if (isset($this->_url[1]) && !method_exists($this->_controller, $this->_url[1])){
+                $this->_error();
+                return false;
+            }
+            else {
                 $this->_controller->index();
             }
-
         }
+
     }
 
     /**
