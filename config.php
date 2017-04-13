@@ -11,7 +11,6 @@ define("PAGE_TITLE", "Test");
 define("HEADER_FILE", "header.php");
 define("FOOTER_FILE", "footer.php");
 
-
 //Hash Key
 define('HASH_KEY', 'Banan2000Alma');
 

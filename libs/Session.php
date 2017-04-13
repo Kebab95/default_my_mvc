@@ -18,7 +18,8 @@ class Session
      * @param string $key
      * @param string $value
      */
-    public static function set($key, $value){
+    public static function set($key, $value)
+    {
         $_SESSION[$key] = $value;
     }
 

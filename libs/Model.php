@@ -14,14 +14,13 @@ class Model
      */
     protected $db;
 
-	/**
-	 * Model constructor.
-	 */
-	public function __construct()
-	{
+    /**
+     * Model constructor.
+     */
+    public function __construct()
+    {
         $this->db = new Database();
-	}
-
+    }
 
 
 }

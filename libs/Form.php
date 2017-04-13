@@ -71,16 +71,15 @@ class Form
     /**
      * Validate
      */
-    public function val($typeOfValidator,$arg = false)
+    public function val($typeOfValidator, $arg = false)
     {
-        if ($arg!=false){
-            $error = $this->_val->{$typeOfValidator}( $this->_postData[$this->_currentItem] , $arg );
-        }
-        else {
-            $error = $this->_val->{$typeOfValidator}( $this->_postData[$this->_currentItem] );
+        if ($arg != false) {
+            $error = $this->_val->{$typeOfValidator}($this->_postData[$this->_currentItem], $arg);
+        } else {
+            $error = $this->_val->{$typeOfValidator}($this->_postData[$this->_currentItem]);
         }
 
-        if ($error){
+        if ($error) {
             $this->_error[$this->_currentItem] = $error;
         }
         return $this;
@@ -92,11 +91,10 @@ class Form
      */
     public function submit()
     {
-        if (empty($this->_error)){
+        if (empty($this->_error)) {
             return true;
-        }
-        else {
-            throw new Exception(implode(", ",$this->_error));
+        } else {
+            throw new Exception(implode(", ", $this->_error));
         }
     }
 }

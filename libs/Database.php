@@ -10,10 +10,10 @@ class Database extends PDO
      */
     public function __construct()
     {
-        parent::__construct(DB_TYPE.':dbname='.DB_NAME.';host='.DB_HOST,
+        parent::__construct(DB_TYPE . ':dbname=' . DB_NAME . ';host=' . DB_HOST,
             DB_USER,
             DB_PASS);
-        parent::setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+        parent::setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
     /**
@@ -24,32 +24,30 @@ class Database extends PDO
      * @param $where null|string
      * @return array|null
      */
-    public function SQLSelect($table, array $columns= array(), $where = null)
+    public function SQLSelect($table, array $columns = array(), $where = null)
     {
 
         $col = "";
-        if (count($columns)==0){
-            $col.="*";
-        }
-        else {
+        if (count($columns) == 0) {
+            $col .= "*";
+        } else {
             foreach ($columns as $column) {
-                if (strlen($col)>0){
-                    $col.=",";
+                if (strlen($col) > 0) {
+                    $col .= ",";
                 }
-                $col.= $column;
+                $col .= $column;
             }
         }
 
-        $sql = 'SELECT '.$col.' FROM '.$table.' '.($where!=null?"WHERE ".$where:"");
-         //echo $sql;
+        $sql = 'SELECT ' . $col . ' FROM ' . $table . ' ' . ($where != null ? "WHERE " . $where : "");
+        //echo $sql;
         $sth = parent::prepare($sql);
         $sth->setFetchMode(PDO::FETCH_ASSOC);
         $sth->execute();
-        if ($sth->rowCount()>0){
+        if ($sth->rowCount() > 0) {
             return $sth->fetchAll();
 
-        }
-        else {
+        } else {
             return null;
         }
 
@@ -65,16 +63,16 @@ class Database extends PDO
         $col = "";
         $val = "";
         foreach ($values as $key => $value) {
-            if (strlen($col)>0){
-                $col.=",";
+            if (strlen($col) > 0) {
+                $col .= ",";
             }
-            $col.= $key;
-            if (strlen($val)>0){
-                $val.=",";
+            $col .= $key;
+            if (strlen($val) > 0) {
+                $val .= ",";
             }
-            $val.= $value;
+            $val .= $value;
         }
-        $sql = "INSERT INTO ".$table." (".$col.") VALUES (".$val.")";
+        $sql = "INSERT INTO " . $table . " (" . $col . ") VALUES (" . $val . ")";
         $sth = parent::prepare($sql);
         $sth->execute();
     }
@@ -89,12 +87,12 @@ class Database extends PDO
     {
         $vals = "";
         foreach ($values as $key => $value) {
-            if (strlen($vals)>0){
-                $vals.=",";
+            if (strlen($vals) > 0) {
+                $vals .= ",";
             }
-            $vals.= $key."=".$value;
+            $vals .= $key . "=" . $value;
         }
-        $sql ="UPDATE ".$table." SET ".$vals." WHERE ".$where;
+        $sql = "UPDATE " . $table . " SET " . $vals . " WHERE " . $where;
         $sth = parent::prepare($sql);
         $sth->execute();
     }
@@ -106,7 +104,7 @@ class Database extends PDO
      */
     public function SQLDelete($table, $where)
     {
-        $sql = "DELETE FROM ".$table." WHERE ".$where;
+        $sql = "DELETE FROM " . $table . " WHERE " . $where;
         $sth = parent::prepare($sql);
         $sth->execute();
     }

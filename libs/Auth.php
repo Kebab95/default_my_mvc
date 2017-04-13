@@ -13,10 +13,9 @@ class Auth
      */
     public static function checkedLogged()
     {
-        if (Session::get("loggedIn") == true){
+        if (Session::get("loggedIn") == true) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
