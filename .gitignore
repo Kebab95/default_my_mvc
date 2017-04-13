@@ -1,25 +1,6 @@
 
 .idea/
-controllers/dashboard.php
-controllers/help.php
-controllers/login.php
-controllers/user.php
-models/
 public/css/default.css
 public/images/
 public/js/default.js
 test/
-views/dashboard/
-views/help/
-views/login/
-views/user/
-controllers/errorpage.php
-views/error/
-!/controllers/errorpage.php
-!/views/error/
-!/views/error/index.php
-!/models/
-/models/dashboard_model.php
-/models/help_model.php
-/models/login_model.php
-/models/user_model.php
