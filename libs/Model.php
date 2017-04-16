@@ -6,7 +6,7 @@
  * Date: 2017.04.10.
  * Time: 14:33
  */
-class Model
+abstract class Model
 {
     /**
      * Variable for Page Database connects
