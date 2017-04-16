@@ -40,14 +40,18 @@ class Database extends PDO
         }
 
         $sql = 'SELECT ' . $col . ' FROM ' . $table . ' ' . ($where != null ? "WHERE " . $where : "");
-        //echo $sql;
-        $sth = parent::prepare($sql);
-        $sth->setFetchMode(PDO::FETCH_ASSOC);
-        $sth->execute();
-        if ($sth->rowCount() > 0) {
-            return $sth->fetchAll();
+        try{
+            //echo $sql;
+            $sth = parent::prepare($sql);
+            $sth->setFetchMode(PDO::FETCH_ASSOC);
+            $sth->execute();
+            if ($sth->rowCount() > 0) {
+                return $sth->fetchAll();
 
-        } else {
+            } else {
+                return null;
+            }
+        } catch (PDOException $e){
             return null;
         }
 
@@ -57,6 +61,7 @@ class Database extends PDO
      * Database Insert SQL generator and execute
      * @param string $table
      * @param array $values
+     * @return bool
      */
     public function SQLInsertOneRow($table, array $values)
     {
@@ -73,8 +78,13 @@ class Database extends PDO
             $val .= $value;
         }
         $sql = "INSERT INTO " . $table . " (" . $col . ") VALUES (" . $val . ")";
-        $sth = parent::prepare($sql);
-        $sth->execute();
+        try{
+
+            $sth = parent::prepare($sql);
+            return $sth->execute();
+        } catch (PDOException $e){
+            return false;
+        }
     }
 
     /**
@@ -82,6 +92,7 @@ class Database extends PDO
      * @param string $table
      * @param array $values
      * @param string $where
+     * @return bool
      */
     public function SQLUpdate($table, array $values, $where)
     {
@@ -93,19 +104,28 @@ class Database extends PDO
             $vals .= $key . "=" . $value;
         }
         $sql = "UPDATE " . $table . " SET " . $vals . " WHERE " . $where;
-        $sth = parent::prepare($sql);
-        $sth->execute();
+        try {
+            $sth = parent::prepare($sql);
+            return $sth->execute();
+        } catch (PDOException $e){
+            return false;
+        }
     }
 
     /**
      * Database Delete SQL generator and execute
      * @param string $table
      * @param string $where
+     * @return bool
      */
     public function SQLDelete($table, $where)
     {
         $sql = "DELETE FROM " . $table . " WHERE " . $where;
-        $sth = parent::prepare($sql);
-        $sth->execute();
+        try {
+            $sth = parent::prepare($sql);
+            return $sth->execute();
+        } catch (PDOException $e){
+            return false;
+        }
     }
 }
