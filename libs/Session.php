@@ -51,4 +51,12 @@ class Session
     {
         return isset($_SESSION[$key]);
     }
+
+    /**
+     * @param string $key
+     */
+    public static function unsetVal($key)
+    {
+        unset($_SESSION[$key]);
+    }
 }
