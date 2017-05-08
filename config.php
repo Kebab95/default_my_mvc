@@ -27,3 +27,4 @@ define("LIBS", "libs/");
 define("CONTROLLERS", "controllers/");
 define("VIEWS", "views/");
 define("MODELS", "models/");
+define("DBCLASSES", "dbclasses/");

@@ -6,7 +6,7 @@
  * Date: 2017.04.10.
  * Time: 14:23
  */
-abstract class View
+class View
 {
     /**
      * Array for Javascript files

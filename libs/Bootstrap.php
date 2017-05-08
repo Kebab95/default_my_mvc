@@ -90,15 +90,15 @@ class Bootstrap
     private function _callControllerMethod()
     {
         $length = count($this->_url);
-       // var_dump($this->_url);
-        if ($length>1 &&$length<6){
-            if (method_exists($this->_controller, $this->_url[1])){
+        // var_dump($this->_url);
+        if ($length > 1 && $length < 6) {
+            if (method_exists($this->_controller, $this->_url[1])) {
                 switch ($length) {
                     case 5:
-                        $this->_controller->{$this->_url[1]}($this->_url[2],$this->_url[3],$this->_url[4]);
+                        $this->_controller->{$this->_url[1]}($this->_url[2], $this->_url[3], $this->_url[4]);
                         break;
                     case 4:
-                        $this->_controller->{$this->_url[1]}($this->_url[2],$this->_url[3]);
+                        $this->_controller->{$this->_url[1]}($this->_url[2], $this->_url[3]);
                         break;
                     case 3:
                         $this->_controller->{$this->_url[1]}($this->_url[2]);
@@ -109,18 +109,16 @@ class Bootstrap
                     default:
                         $this->_controller->index();
                 }
-            }
-            else {
+            } else {
                 $this->_error();
                 return false;
             }
 
-        }else {
-            if (isset($this->_url[1]) && !method_exists($this->_controller, $this->_url[1])){
+        } else {
+            if (isset($this->_url[1]) && !method_exists($this->_controller, $this->_url[1])) {
                 $this->_error();
                 return false;
-            }
-            else {
+            } else {
                 $this->_controller->index();
             }
         }

@@ -16,15 +16,61 @@ class Database extends PDO
         parent::setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
+    public function SQLSelectToClass(
+            $className,
+            $table,
+            array $columns = array(),
+            $where = null,
+            $join = null,
+            $etc = null
+        )
+    {
+        $col = "";
+        if (count($columns) == 0) {
+            $col .= "*";
+        } else {
+            foreach ($columns as $column) {
+                if (strlen($col) > 0) {
+                    $col .= ",";
+                }
+                $col .= $column;
+            }
+        }
+
+        $sql = 'SELECT ' . $col . ' FROM ' . $table .  ($join != null ? ' ' .$join : ""). ($where != null ? " WHERE " . $where : "").($etc != null ? " " . $etc : "");
+        try{
+            //echo $sql;
+            $sth = parent::prepare($sql);
+            $sth->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE,$className);
+            $sth->execute();
+            if ($sth->rowCount() > 0) {
+                return $sth->fetchAll();
+
+            } else {
+                return null;
+            }
+        } catch (PDOException $e){
+            return null;
+        }
+    }
+
     /**
      *
      * Database Select SQL generator and execute
      * @param $table string
      * @param $columns array
      * @param $where null|string
+     * @param $join null|string
+     * @param $etc null|string
      * @return array|null
      */
-    public function SQLSelect($table, array $columns = array(), $where = null)
+    public function SQLSelect(
+            $table,
+            array $columns = array(),
+            $where = null,
+            $join = null,
+            $etc = null
+        )
     {
 
         $col = "";
@@ -39,7 +85,7 @@ class Database extends PDO
             }
         }
 
-        $sql = 'SELECT ' . $col . ' FROM ' . $table . ' ' . ($where != null ? "WHERE " . $where : "");
+        $sql = 'SELECT ' . $col . ' FROM ' . $table .  ($join != null ? ' ' .$join : ""). ($where != null ? " WHERE " . $where : "").($etc != null ? " " . $etc : "");
         try{
             //echo $sql;
             $sth = parent::prepare($sql);
